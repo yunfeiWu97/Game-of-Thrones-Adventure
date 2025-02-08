@@ -209,6 +209,16 @@ button:focus {
   background: #aaa;
 }
 
+footer {
+  position: fixed;
+  bottom: 5px;
+  right: 10px; /* fixed at right bottom */
+  color: gray;
+  font-size: 12px;
+  padding: 5px 5px;
+}
+
+
 @media (max-width: 768px) {
   body {
     display: flex;
