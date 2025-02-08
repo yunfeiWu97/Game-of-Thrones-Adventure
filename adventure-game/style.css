@@ -29,7 +29,7 @@ html, body {
     border-radius: 12px;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
 }
-  
+
 h1 {
 font-size: 2.5rem;
 margin-bottom: 1.5rem;
@@ -155,24 +155,52 @@ background: linear-gradient(135deg, #777, #444);
     transform: scale(1.05); /* slightly bigger scale */      
   }
   
-  /* Fade in and out animation */
-  .fade-out {
-    animation: fadeOut 0.5s forwards;
-  }
 
-  .fade-in {
-    animation: fadeIn 0.5s forwards;
-  }
+/* ✨ word */
+@keyframes shimmer {
+  0% { background-position: -200%; }
+  100% { background-position: 200%; }
+}
 
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
+.glow-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.1) 30%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.1) 70%);
+  background-size: 200% auto;
+  color: #ffffff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: shimmer 2s linear infinite; 
+  transition: transform 0.3s ease-in-out;
+}
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+/* 🐉 */
+#dragon-icon img {
+  width: 380px; 
+  vertical-align: middle; 
+  margin-top: 35px;
+  height: auto;
+  display: inline-block;
+  margin-left: 10px;
+  animation: dragon-float 3s ease-in-out infinite alternate;
+}
+
+#dragon-icon img:hover {
+  animation: none;
+  transform: scale(1.2) translateY(-5px); 
+}
+
+/* fade out over */
+@keyframes fadeOutCurtain {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-150px); } 
+}
+
+.fade-out {
+  animation: fadeOutCurtain 1s ease-in-out forwards;
+}
 
   /* 🎵 */
 #music-container {

@@ -151,89 +151,107 @@ const storyMap = {
   }
 };
 
-// select 
+// Get DOM objects
 const questionElement = document.querySelector("#question");
 const answersElement = document.querySelector("#answers");
 const nextBtn = document.querySelector("#next-btn");
 
-// binding events 
-document.addEventListener("DOMContentLoaded", () => {
-    renderQuestion(); // init the interface (note: make sure to execute renderQuestion after the web page loaded)
-
-    nextBtn.addEventListener("click", () => {
-        currentState = "start"; // restart the game
-        renderQuestion();
-    });
-});
-
-// create button
+// Add Answer Button
 function addAnswerButton(answerText, nextState) {
-    const li = document.createElement("li");  // wrap button
-    const button = document.createElement("button");
-    button.textContent = answerText;
-    button.addEventListener("click", () => {
-        currentState = nextState; // change to new scenario 
-        renderQuestion();  
-    });
-
-    li.appendChild(button);
-    answersElement.appendChild(li);
+  const li = document.createElement("li");
+  const button = document.createElement("button");
+  button.textContent = answerText;
+  button.addEventListener("click", () => {
+    currentState = nextState; // Update to new state
+    renderQuestion();
+  });
+  li.appendChild(button);
+  answersElement.appendChild(li);
 }
 
-// renders the story text
+// Render the question and answer and add a fade-in effect
 function renderQuestion() {
+  // remove the animation object in order to get fade-in
+  questionElement.classList.remove("fade-in");
+  answersElement.classList.remove("fade-in");
+
+  // Update content after slight delay
+  setTimeout(() => {
     const currentData = storyMap[currentState];
-
-    // update the questions
+    // Update question text
     questionElement.textContent = currentData.text;
+    // Clear the answer from the last render
+    answersElement.innerHTML = "";
 
-    answersElement.innerHTML = "";  // each time renderQuestion runs, clear the contents of answers
-
-    // show next button when no more answer 
+    // Determine whether to display the Next button based on the current state
     if (!currentData.answers || currentData.answers.length === 0) {
-        nextBtn.style.display = "block";  // show Next button
+      nextBtn.style.display = "block";
     } else {
-        nextBtn.style.display = "none";   // hide Next button
-        for (const answer of currentData.answers) {
-          addAnswerButton(answer.text, answer.nextState);
-        };
+      nextBtn.style.display = "none";
+      for (const answer of currentData.answers) {
+        addAnswerButton(answer.text, answer.nextState);
+      }
     }
+    
+    questionElement.classList.add("fade-in");
+    answersElement.classList.add("fade-in");
+  }, 150);
 }
 
-// music 
 document.addEventListener("DOMContentLoaded", () => {
+  // hide nextBtn during the wait
+  nextBtn.style.display = "none";
+  
+  // Init keep the current content for 2 seconds
+  setTimeout(() => {
+    
+    questionElement.classList.add("fade-out");
+    // Wait for the fade-out x millisecond before updating the content
+    setTimeout(() => {
+      questionElement.classList.remove("fade-out");
+      renderQuestion();
+    }, 900);
+  }, 1500);
+
+  // Restart
+  nextBtn.addEventListener("click", () => {
+    currentState = "start";
+    renderQuestion();
+  });
+
+  // bgmusic
   const musicBtn = document.querySelector("#music-btn");
   const musicIcon = document.querySelector("#music-icon");
   const musicProgress = document.querySelector("#music-progress");
   const bgMusic = document.querySelector("#bg-music");
 
-  // try auto play
+  // autoplay 
   bgMusic.play().then(() => {
-      musicIcon.src = "./pause-svgrepo-com.svg"; 
+    musicIcon.src = "./pause-svgrepo-com.svg";
   }).catch(error => {
-      console.log("autoplay is banned, wait for user's click");
+    console.log("Autoplay is not allowed (browser problem)");
   });
 
-  // click play/pause
+  // play/pause
   musicBtn.addEventListener("click", () => {
-      if (bgMusic.paused) {
-          bgMusic.play();
-          musicIcon.src = "./pause-svgrepo-com.svg"; // pause icon
-      } else {
-          bgMusic.pause();
-          musicIcon.src = "./media-player-music-music-symbol-svgrepo-com.svg"; // 切换为播放图标
-      }
+    if (bgMusic.paused) {
+      bgMusic.play();
+      musicIcon.src = "./pause-svgrepo-com.svg";
+    } else {
+      bgMusic.pause();
+      musicIcon.src = "./media-player-music-music-symbol-svgrepo-com.svg";
+    }
   });
 
-  // Update the progress bar in real time to synchronize the progress bar with the music.
+  // Update the music progress bar in real time
   bgMusic.addEventListener("timeupdate", () => {
-      const progress = (bgMusic.currentTime / bgMusic.duration) * 100;
-      musicProgress.value = progress;
+    const progress = (bgMusic.currentTime / bgMusic.duration) * 100;
+    musicProgress.value = progress;
   });
 
-  // Monitor the user's operation of dragging the progress bar and adjust the music playback progress.
+  // Drag the progress bar to adjust the playback progress
   musicProgress.addEventListener("input", (e) => {
-      const seekTime = (e.target.value / 100) * bgMusic.duration;
-      bgMusic.currentTime = seekTime;
+    const seekTime = (e.target.value / 100) * bgMusic.duration;
+    bgMusic.currentTime = seekTime;
   });
 });

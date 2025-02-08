@@ -13,9 +13,14 @@
 			<h1>Game of Thrones adventure</h1>
 
 			<div id="question-container">
-        <!-- using aria-live, screen reader can read the changes -->
-				<p id="question" aria-live="polite">Your adventure begins now...</p>
-			</div>
+				<p id="question" aria-live="polite">
+						<span class="glow-text">Your adventure begins now .....</span>
+						<span id="dragon-icon">
+								<img src="./dragon.jpeg" alt="Dragon Icon">
+						</span>
+				</p>
+		</div>
+		
       
 			<ul id="answers" aria-label="Answer choices">
 				<!-- Answer buttons will be injected here by JavaScript -->
