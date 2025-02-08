@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Game of Thrones Adventure Game</title>
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+	<body>
+    <img src="./bgpic.webp" class="background-image" alt="Westeros Background"> 
+
+		<div id="game-container" role="main">
+			<h1>Game of Thrones adventure</h1>
+
+			<div id="question-container">
+        <!-- using aria-live, screen reader can read the changes -->
+				<p id="question" aria-live="polite">Your adventure begins now...</p>
+			</div>
+      
+			<ul id="answers" aria-label="Answer choices">
+				<!-- Answer buttons will be injected here by JavaScript -->
+			</ul>
+
+			<button id="next-btn" aria-label="Go to the next step">Next</button>
+		</div>
+
+		<!-- Background music -->
+		<div id="music-container">
+			<button id="music-btn">
+				<img id="music-icon" src="./media-player-music-music-symbol-svgrepo-com.svg" alt="Play Music" />
+			</button>
+			<input type="range" id="music-progress" min="0" max="100" value="0" />
+		</div>
+
+		<audio id="bg-music" src="https://archive.org/download/tvtunes_20712/Game%20of%20Thrones.mp3" loop></audio>
+
+
+		<script src="./script.js"></script>
+	</body>
+</html>
