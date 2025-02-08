@@ -90,80 +90,13 @@ margin-top: 1rem;
 background: linear-gradient(135deg, #777, #444);
 }
 
-@media (max-width: 768px) {
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-  
-    #game-container {
-      width: 80%;
-      max-width: 600px; 
-      margin: 1.5rem auto;
-      padding: 1.5rem;
-    }
-  
-    h1 {
-      font-size: 1.5rem;
-    }
-  
-    #question {
-      font-size: 1.1rem;
-    }
-  
-    button, #next-btn {
-      width: 100%;
-      padding: 1rem;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    #dragon-icon img {
-      width: 250px; 
-      margin-top: 20px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    #game-container {
-      width: 70%; 
-      max-width: 400px; 
-      padding: 1rem;
-      margin: 1rem auto;
-    }
-  
-    h1 {
-      font-size: 1.3rem;
-    }
-  
-    #question {
-      font-size: 1rem;
-      line-height: 1.2;
-    }
-  
-    button, #next-btn {
-      width: 90%; 
-      font-size: 0.8rem;
-      padding: 0.9rem;
-      margin-bottom: 0.5rem;
-    }
-
-    #dragon-icon img {
-      width: 180px; 
-      margin-top: 15px;
-    }
-  }
-  
-  /* Accessability for keyboard user*/
-  button:focus {
-    outline: none;  /* Remove default */
-    box-shadow: 0 0 20px #c48e8e;
-    border-color: #c17f7f;
-    transform: scale(1.05); /* slightly bigger scale */      
-  }
+/* Accessability for keyboard user*/
+button:focus {
+  outline: none;  /* Remove default */
+  box-shadow: 0 0 20px #c48e8e;
+  border-color: #c17f7f;
+  transform: scale(1.05); /* slightly bigger scale */      
+}
   
 
 /* ✨ word */
@@ -274,4 +207,71 @@ background: linear-gradient(135deg, #777, #444);
 
 #music-progress:hover {
   background: #aaa;
+}
+
+@media (max-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  #game-container {
+    width: 80%;
+    max-width: 600px; 
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  #question {
+    font-size: 1.1rem;
+  }
+
+  button, #next-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #dragon-icon img {
+    width: 250px; 
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  #game-container {
+    width: 75%; 
+    max-width: 400px; 
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  #question {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  button, #next-btn {
+    width: 90%; 
+    font-size: 0.8rem;
+    padding: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #dragon-icon img {
+    width: 180px; 
+    margin-top: 15px;
+  }
 }
